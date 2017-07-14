@@ -64,14 +64,14 @@
         <div class="row" id="divCustomerList" ></div>
         <hr />
 
-        <div class="row form-group">
-            <label class="col-xs-3 col-form-label" for="txtWechatName">微信名<span class="error">*</span></label>
+        <div class="row form-group form-horizontal">
+            <label class="col-xs-3 control-label" for="txtWechatName">微信名<span class="error">*</span></label>
             <div class="col-xs-6"><input type="text" id="txtWechatName" name="txtWechatName" class="form-control" /></div>
-            <div class="col-xs-2"><span class="error" id="spWechatNameError"></span></div>
+            <div class="col-xs-2 error"><span id="spWechatNameError"></span></div>
         </div>
         <div class="row form-group">
             <label class="col-xs-3 col-form-label" for="ddlNumberOfPeople">人数<span class="error">*</span></label>
-            <div class="col-xs-6 dropdown">
+            <div class="col-xs-6">
                 <select name="ddlNumberOfPeople" id="ddlNumberOfPeople" class="form-control">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -86,27 +86,27 @@
                     <option value="10">10</option>
                 </select>
             </div>
-            <div class="col-xs-2"><span class="error" id="spNumberOfPeopleError"></span></div>
+            <div class="col-xs-2 error"><span  id="spNumberOfPeopleError"></span></div>
         </div>
         <div class="row form-group">
             <label class="col-xs-3 col-form-label" for="txtEmail">Email</label>
-            <div class="col-xs-6"><input type="email" name="txtEmail" class="form-control" id="txtEmail"/></div>
-            <div class="col-xs-2"><span class="error" id="spEmailError"></span></div>
+            <div class="col-xs-6"><input type="email" id="txtEmail" name="txtEmail" class="form-control" /></div>
+            <div class="col-xs-2 error"><span id="spEmailError"></span></div>
         </div>
     <div class="row form-group">
         <label class="col-xs-3 col-form-label" for="txtRealName">姓名<span class="error">*</span></label>
         <div class="col-xs-6"><input type="text" name="txtRealName" class="form-control" id="txtRealName" /></div>
-        <div class="col-xs-2"><span class="error" id="spRealNameError"></span></div>
+        <div class="col-xs-2 error"><span  id="spRealNameError"></span></div>
     </div>
     <div class="row form-group">
         <label class="col-xs-3 col-form-label" for="txtMobile">电话<span class="error">*</span></label>
         <div class="col-xs-6"><input type="tel" name="txtMobile" class="form-control"  id="txtMobile"/></div>
-        <div class="col-xs-2"><span class="error" id="spMobileError"></span></div>
+        <div class="col-xs-2 error"><span id="spMobileError"></span></div>
     </div>
     <div class="row form-group">
         <label class="col-xs-3 col-form-label" for="txtDesc">备注<span class="error">*</span></label>
         <div class="col-xs-6"><input type="text" name="txtDesc" class="form-control" id="txtDesc" /></div>
-        <div class="col-xs-2"><span class="error" id="spDescError"></span></div>
+        <div class="col-xs-2 error"><span  id="spDescError"></span></div>
     </div>
     <div class="row form-group">
         <div class="col-xs-3" >
@@ -118,7 +118,11 @@
             </button> 
         </div>
     </div>
-    test
+    <div class="row form-group">
+        <div class="col-xs-3">
+            <span id="spResult"></span>
+        </div>
+    </div>
 </div>
 
 

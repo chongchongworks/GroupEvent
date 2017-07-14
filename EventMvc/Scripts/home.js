@@ -1,4 +1,5 @@
 ﻿
+//Load Customers
 $(document).ready(function ()
 {
     var count = 0;
@@ -41,4 +42,45 @@ $(document).ready(function ()
 
     })
 
+    
 })
+
+
+//Bind PayPal button
+
+//Bind submit button
+$('#btnAdd').click(function ()
+{
+    var result = validateInput();
+})
+//Validate Input
+function validateInput()
+{
+    var result = true;
+ 
+    // Wechat name
+    if ($('#txtWechatName').val().trim().length == 0)
+    {
+        $('#spWechatNameError').text('Required');
+    }
+    else
+    {
+        $('#spWechatNameError').text('');
+    }
+
+    // Email 
+    if ($('#txtEmail').val().trim().length > 0)
+    {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (regex.test($('#txtEmail').val().trim()))
+        {
+            $('#spEmailError').text('');
+        }
+        else
+        {
+            $('#spEmailError').text('Invalid');
+        }
+    }
+
+    return result;
+}
