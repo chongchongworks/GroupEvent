@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+   
+}
+
+
+<div class="subtitle">
+  
+        <p>
+            时间: 6月9号 - 6月12号<br />
+            地点: Murray River<br />
+            价格: $160/人 (含3晚住宿)，油费和食物费用share <br />
+            人数: 10人
+        </p>
+        活动安排:
+        <ul>
+            <li>9号下午到达码头，船东讲解开船事项</li>
+            <li>10号-11号沿河航行</li>
+            <li>12号早上回到码头</li>
+        </ul>
+        <p>
+            需要携带：个人洗漱,防晒用品,渔具
+        </p>
+        <p>
+            The boat is fully self contained. We supply doonas, doona covers, pillows, and pillowcases.
+            <b>You will need to supply your own sheets and towels</b>. We also supply dish washing powder and liquid,
+            and toilet paper. You may like to bring some dvds and cds…..and food and drink of course!<br />
+
+        </p>
+        <p>
+            We have added air conditioners on all of our boats  and the top deck has table and chairs, sun lounges and
+            fibreglass eskys on the top  and bottom deck  for our client’s convenience which have a 10-14 day ice rating.
+            To add to the atmosphere we have installed out door speakers which are three way for music on the top deck,
+            bottom deck or both. We have just installed 32” flat screens  TVs  and DVDs on all our middleclass boats
+            which is another  popular feature.
+        </p>
+
+        <p style="border-style:solid;border-width:1px; padding:10px;">
+            Account Name: Cong Liu<br />
+            BSB Number: 063791<br />
+            Account Number: 1106 6562<br />
+            Amount: $155/人<br />
+            Description: 你的姓名+houseboat<br />
+        </p>
+        <p>
+            组织人: 气死雅思
+        </p>
+        <p>
+            目前预订: <span id="spCount"></span> 
+            <br />
+            已付款: <span id="spPaidCount"></span>
+        </p>
+
+        <div class="info">
+            <ul>
+                <li>修改信息 -- 请正确填写你的手机号,然后输入信息,系统会自动更新.</li>
+                <li>删除报名 -- 请正确填写手机号, 然后'人数'输入0</li>
+                <li>付款后, 你的名字会变成<span style="color:green;">绿色</span>, 此后不可删除或更改</li>
+            </ul>
+        </div>
+   
+</div>
+<div>
+        <div class="row" id="divCustomerList" ></div>
+        <hr />
+
+        <div class="row form-group">
+            <label class="col-xs-3 col-form-label" for="txtWechatName">微信名<span class="error">*</span></label>
+            <div class="col-xs-6"><input type="text" id="txtWechatName" name="txtWechatName" class="form-control" /></div>
+            <div class="col-xs-2"><span class="error" id="spWechatNameError"></span></div>
+        </div>
+        <div class="row form-group">
+            <label class="col-xs-3 col-form-label" for="ddlNumberOfPeople">人数<span class="error">*</span></label>
+            <div class="col-xs-6 dropdown">
+                <select name="ddlNumberOfPeople" id="ddlNumberOfPeople" class="form-control">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="col-xs-2"><span class="error" id="spNumberOfPeopleError"></span></div>
+        </div>
+        <div class="row form-group">
+            <label class="col-xs-3 col-form-label" for="txtEmail">Email</label>
+            <div class="col-xs-6"><input type="email" name="txtEmail" class="form-control" id="txtEmail"/></div>
+            <div class="col-xs-2"><span class="error" id="spEmailError"></span></div>
+        </div>
+    <div class="row form-group">
+        <label class="col-xs-3 col-form-label" for="txtRealName">姓名<span class="error">*</span></label>
+        <div class="col-xs-6"><input type="text" name="txtRealName" class="form-control" id="txtRealName" /></div>
+        <div class="col-xs-2"><span class="error" id="spRealNameError"></span></div>
+    </div>
+    <div class="row form-group">
+        <label class="col-xs-3 col-form-label" for="txtMobile">电话<span class="error">*</span></label>
+        <div class="col-xs-6"><input type="tel" name="txtMobile" class="form-control"  id="txtMobile"/></div>
+        <div class="col-xs-2"><span class="error" id="spMobileError"></span></div>
+    </div>
+    <div class="row form-group">
+        <label class="col-xs-3 col-form-label" for="txtDesc">备注<span class="error">*</span></label>
+        <div class="col-xs-6"><input type="text" name="txtDesc" class="form-control" id="txtDesc" /></div>
+        <div class="col-xs-2"><span class="error" id="spDescError"></span></div>
+    </div>
+    <div class="row form-group">
+        <div class="col-xs-3" >
+            <button type="button" id="btnAdd" name="btnAdd" class="btn"  >我要占座</button>
+        </div>
+        <div class="col-xs-6">
+            <button type="button" id="btnPayPal" name="btnPayPal" class="btn">
+                <img src="~/Images/button-paypal.png" class="button" style="background:none;border:0px;"/>
+            </button> 
+        </div>
+    </div>
+    <div style="height:30px;">&nbsp;</div>
+</div>
+
+
+
+

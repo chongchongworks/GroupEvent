@@ -1,0 +1,91 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: 12px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+footer {
+    clear: both;
+    background-color: #eeeeee;
+    font-size: .7em;
+    height: 100px;
+    text-align:center;
+}
+
+
+
+/* info and errors */
+.message-info {
+    border: 1px solid;
+    clear: both;
+    padding: 10px 20px;
+}
+
+.message-error {
+    clear: both;
+    color: #EE5921;
+    font-size: 0.9em;
+    /*font-weight: bold;*/
+    margin: 20px 0 10px 0;
+}
+
+.message-success {
+    color: #96C950;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.error {
+    color: #EE5921;
+}
+
+.info
+{
+    clear: both;
+    color: #EE5921;
+    /*font-size: 0.80em;*/
+    font-weight:normal;
+}
+
+.paid-backgroup {
+    background-color:#96C950;
+    border-style: Solid;
+    border-width: 1px;
+}
+
+.dl-item {
+    background-color: #cccccc;
+    border-style: Solid;
+    border-width: 1px;
+}
+
+.subtitle {
+  padding: 30px;
+  margin-bottom: 30px;
+  
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
