@@ -27,7 +27,7 @@ namespace EventMvc.api
             {
                 customers.Add(new Customer()
                 {
-                    Name = node.SelectSingleNode("Name").InnerText,
+                    WechatName = node.SelectSingleNode("WechatName").InnerText,
                     Email = node.SelectSingleNode("Email").InnerText,
                     NumberOfPeople = node.SelectSingleNode("NumberOfPeople").InnerText,
                     Mobile = node.SelectSingleNode("Mobile").InnerText,
@@ -75,7 +75,7 @@ namespace EventMvc.api
                 if (node.SelectSingleNode("Mobile").InnerText == customer.Mobile)
                 {
                     isExisting = true;
-                    userGuid = node.SelectSingleNode("Guid").InnerText;
+                    customer.Guid = node.SelectSingleNode("Guid").InnerText;
 
                     // remove people if numberOfPeople is 0 and haven't paid
                     if (Convert.ToInt32(customer.NumberOfPeople) == 0 && !Convert.ToBoolean(node.SelectSingleNode("Paid").InnerText))
@@ -87,7 +87,7 @@ namespace EventMvc.api
                     }
                     else
                     {
-                        node.SelectSingleNode("Name").InnerText = customer.Name;
+                        node.SelectSingleNode("WechatName").InnerText = customer.WechatName;
                         node.SelectSingleNode("Email").InnerText = customer.Email;
 
                         node.SelectSingleNode("RealName").InnerText = customer.RealName;
@@ -114,8 +114,8 @@ namespace EventMvc.api
 
                 XmlNode customerNode = xmlDoc.CreateElement("Customer");
 
-                XmlNode nameElement = xmlDoc.CreateElement("Name");
-                nameElement.InnerText = customer.Name;
+                XmlNode nameElement = xmlDoc.CreateElement("WechatName");
+                nameElement.InnerText = customer.WechatName;
                 customerNode.AppendChild(nameElement);
 
                 XmlNode emailElement = xmlDoc.CreateElement("Email");

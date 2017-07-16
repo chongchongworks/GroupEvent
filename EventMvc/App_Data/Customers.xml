@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Customers>
   <Customer>
-    <Name>test</Name>
+    <WechatName>test</WechatName>
     <Email>
     </Email>
     <NumberOfPeople>1</NumberOfPeople>
@@ -12,28 +12,16 @@
     </Desc>
     <Guid>8f8acb25-4524-4019-bd85-fef6beb3a630</Guid>
   </Customer>
-	<Customer> 
-		<Name>test abc rrr</Name>
-		<Email>
-		</Email>
-		<NumberOfPeople>2</NumberOfPeople>
-		<RealName>test</RealName>
-		<Mobile>0430510300</Mobile>
-		<Paid>True</Paid>
-		<Desc>
-		</Desc>
-		<Guid>8f8acb25-4524-4019-bd85-fef6beb3a630</Guid>
-	</Customer>
-	<Customer>
-		<Name>气死雅思</Name>
-		<Email>
-		</Email>
-		<NumberOfPeople>2</NumberOfPeople>
-		<RealName>test</RealName>
-		<Mobile>0430510308</Mobile>
-		<Paid>False</Paid>
-		<Desc>
-		</Desc>
-		<Guid>8f8acb25-4524-4019-bd85-fef6beb3a630</Guid>
-	</Customer>
+  <Customer>
+    <WechatName>test abc rrr</WechatName>
+    <Email>
+    </Email>
+    <NumberOfPeople>2</NumberOfPeople>
+    <RealName>test</RealName>
+    <Mobile>0430510300</Mobile>
+    <Paid>True</Paid>
+    <Desc>
+    </Desc>
+    <Guid>8f8acb25-4524-4019-bd85-fef6beb3a630</Guid>
+  </Customer>
 </Customers>

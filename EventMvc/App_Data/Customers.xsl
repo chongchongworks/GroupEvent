@@ -6,8 +6,8 @@
   </xsl:template>
   <xsl:template match ="Customer">
     <Customer>
-      <xsl:attribute name="Name">
-        <xsl:value-of select="Name"/>
+      <xsl:attribute name="WechatName">
+        <xsl:value-of select="WechatName"/>
       </xsl:attribute>
       <xsl:attribute name="Email">
         <xsl:value-of select="Email"/>
