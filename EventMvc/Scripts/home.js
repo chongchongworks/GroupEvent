@@ -26,10 +26,18 @@ $('#btnPayPal').click(function ()
 
         //Post data to Paypal
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", yourUrl, true);
+        xhr.open("POST", config.PaypalUrl, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
-            value: value
+            business: config.PaypalBusinessEmail,
+            item_name: config.PaypalItemName,
+            item_number: customer.Mobile,
+            amount: config.PaypalItemAmount,
+            quantity: customer.NumberOfPeople,
+            currency_code: config.PaypalCurrencyCode,
+            rm: config.PaypalReturnMethod,
+            return: config.PaypalReturnUrl + "?guid=" + customer.Guid,
+            cancel_return: config.PaypalCancelUrl
         }));
     }
 
@@ -190,16 +198,17 @@ function SaveCustomer()
             $('#spResult').text('Success');
             $('#spResult').addClass('message-success');
 
-            return customer;
+            
         },
         error: function (data)
         {
             var responseText = jQuery.parseJSON(data.responseText);
             $('#spResult').text('Failed - ' + responseText.Message);
             $('#spResult').addClass('message-error');
-            return null;
         }
     });
+
+    return customer;
 }
 
 // Get Configuration
