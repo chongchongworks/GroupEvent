@@ -12,19 +12,8 @@ namespace EventMvc.api
 {
     public class ConfigController : ApiController
     {
-        //        <add key = "PaypalUrl" value="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick"/>
-        //<add key = "PaypalBusinessEmail" value="chongchong.rmit-facilitator@gmail.com"/>
-        //<!--<add key = "PaypalUrl" value="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"/>
-        //<add key = "PaypalBusinessEmail" value="chongchong.rmit@gmail.com"/>-->
 
-        //<add key = "PaypalReturnUrl" value="Thankyou.aspx"/>
-        //<add key = "PaypalCancelUrl" value="Default.aspx"/>
-        //<add key = "PaypalItemName" value="Houseboat"/>
-        //<add key = "PaypalItemAmount" value="160"/>
-        //<add key = "PaypalAlternateAmount" value="100"/>
-        //<add key = "PaypalCurrencyCode" value="AUD"/>
-        //<add key = "PaypalReturnMethod" value="2"/>
-
+        // GET: api/Config
         [HttpGet]
         public HttpResponseMessage LoadConfig()
         {

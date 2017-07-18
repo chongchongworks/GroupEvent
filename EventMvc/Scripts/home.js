@@ -5,6 +5,7 @@ $(document).ready(function ()
 
 
     LoadCustomers();
+ 
     
 });
 
@@ -19,6 +20,14 @@ $('#btnPayPal').click(function ()
         var customer = SaveCustomer();
         if (typeof customer == 'undefined' || customer == null)
             return;
+        else
+        {
+            // remove Success message
+            $('#spResult').text('');
+            $('#spResult').removeClass('message-success');
+        }
+
+
 
         var config = LoadConfig();
         if (config == undefined || config == null)
@@ -214,12 +223,14 @@ function SaveCustomer()
 // Get Configuration
 function LoadConfig()
 {
+    var config = null;
+
     $.ajax({
-        url: '../api/Config',
+        url: '../api/config',
         type: 'get',
         success: function (data)
         {
-            var config = {
+            config  = {
                 PaypalUrl: data.PaypalUrl,
                 PaypalReturnUrl: data.PaypalReturnUrl,
                 PaypalCancelUrl: data.PaypalCancelUrl,
@@ -230,14 +241,14 @@ function LoadConfig()
                 PaypalReturnMethod: data.PaypalReturnMethod
             };
 
-            return config;
-         
+            
         },
         error: function (data)
         {
             alert('系统错误，请刷新以后，再试一次');
-            return null;
         }
 
     });
+     
+    return config;
 }
