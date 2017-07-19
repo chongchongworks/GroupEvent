@@ -5,7 +5,51 @@ $(document).ready(function ()
 
 
     LoadCustomers();
- 
+    paypal.Button.render({
+        env: 'sandbox', // sandbox | production
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+        client: {
+            sandbox: 'Ab7vejfykFlYEiAOt8_I6ZWTL8YOu_nUV1vRQLIGOOa3GDololwx4uQTYyOwgzrzOFFhVSVWD49k8pvv',
+            production: 'AUBpXrl_17wXu_-BS9CXYDe4GIWYEUdx_V9Kt2hPpcagFXEEE_30nPv4ywXlXoO77nhTNAltXm_kOpKs'
+        },
+
+        // Show the buyer a 'Pay Now' button in the checkout flow
+        commit: true,
+
+        // payment() is called when the button is clicked
+        payment: function (data, actions)
+        {
+            var result = validateInput();
+            if (result == true)
+            {
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '5', currency: 'AUD' }
+                            }
+                        ]
+                    }
+                });
+            }
+        },
+
+        // onAuthorize() is called when the buyer approves the payment
+        onAuthorize: function (data, actions)
+        {
+
+            // Make a call to the REST api to execute the payment
+            return actions.payment.execute().then(function ()
+            {
+                window.alert('Payment Complete!');
+            });
+        }
+    }, '#paypal-button');
+
+    
     
 });
 
@@ -17,7 +61,7 @@ $('#btnPayPal').click(function ()
 
     if (result == true)
     {
-        var customer = SaveCustomer();
+        var customer = SaveCustomer(false);
         if (typeof customer == 'undefined' || customer == null)
             return;
         else
@@ -59,7 +103,7 @@ $('#btnAdd').click(function ()
 
     if (result == true)
     {
-        SaveCustomer();
+        SaveCustomer(true);
     }
 
 });
@@ -180,7 +224,7 @@ function LoadCustomers()
 }
 
 //Save Customer
-function SaveCustomer()
+function SaveCustomer(isAsync)
 {
     var customer =
                 {
@@ -197,6 +241,7 @@ function SaveCustomer()
     $.ajax({
         url: '../api/customer',
         type: 'post',
+        async: isAsync,
         data: JSON.stringify(customer),
         contentType: 'application/json',
         success: function (data)
@@ -228,6 +273,7 @@ function LoadConfig()
     $.ajax({
         url: '../api/config',
         type: 'get',
+        async:false,
         success: function (data)
         {
             config  = {
