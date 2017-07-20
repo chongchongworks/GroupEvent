@@ -5,6 +5,14 @@ $(document).ready(function ()
 
 
     LoadCustomers();
+    
+    
+    renderPaypalButton();
+});
+
+
+function renderPaypalButton()
+{
     paypal.Button.render({
         env: 'sandbox', // sandbox | production
 
@@ -21,15 +29,38 @@ $(document).ready(function ()
         // payment() is called when the button is clicked
         payment: function (data, actions)
         {
+            var customer =
+                {
+                    WechatName: $('#txtWechatName').val().trim(),
+                    NumberOfPeople: $('#ddlNumberOfPeople').val(),
+                    Email: $('#txtEmail').val().trim(),
+                    RealName: $('#txtRealName').val().trim(),
+                    Mobile: $('#txtMobile').val().trim(),
+                    Desc: $('#txtDesc').val().trim(),
+                    Paid: false,
+                    Guid: null
+                };
+
             var result = validateInput();
             if (result == true)
             {
+                var customer = SaveCustomer(customer, false, false);
+
+                if (typeof customer == 'undefined' || customer == null || customer.NumberOfPeople=='0' || customer.Guid==null)
+                    return;
+
+                var config = LoadConfig();
+                if (config == undefined || config == null)
+                    return;
+
+                var totalAmount = parseFloat(config.PaypalItemAmount).toFixed(2) * parseInt(customer.NumberOfPeople);
+
                 // Make a call to the REST api to create the payment
                 return actions.payment.create({
                     payment: {
                         transactions: [
                             {
-                                amount: { total: '5', currency: 'AUD' }
+                                amount: { total: totalAmount, currency: 'AUD' }
                             }
                         ]
                     }
@@ -40,61 +71,35 @@ $(document).ready(function ()
         // onAuthorize() is called when the buyer approves the payment
         onAuthorize: function (data, actions)
         {
-
+           
             // Make a call to the REST api to execute the payment
             return actions.payment.execute().then(function ()
             {
-                window.alert('Payment Complete!');
+                var customer =
+              {
+                  WechatName: $('#txtWechatName').val().trim(),
+                  NumberOfPeople: $('#ddlNumberOfPeople').val(),
+                  Email: $('#txtEmail').val().trim(),
+                  RealName: $('#txtRealName').val().trim(),
+                  Mobile: $('#txtMobile').val().trim(),
+                  Desc: $('#txtDesc').val().trim(),
+                  Paid: true,
+                  Guid: null
+              };
+                SaveCustomer(customer, true, true);
             });
+        },
+        
+        onError: function (err)
+        {
+            // Show an error page here, when an error occurs
+            alert(err.message);
         }
     }, '#paypal-button');
 
-    
-    
-});
+}
 
 
-//Bind PayPal button
-$('#btnPayPal').click(function ()
-{
-    var result = validateInput();
-
-    if (result == true)
-    {
-        var customer = SaveCustomer(false);
-        if (typeof customer == 'undefined' || customer == null)
-            return;
-        else
-        {
-            // remove Success message
-            $('#spResult').text('');
-            $('#spResult').removeClass('message-success');
-        }
-
-
-
-        var config = LoadConfig();
-        if (config == undefined || config == null)
-            return;
-
-        //Post data to Paypal
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", config.PaypalUrl, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            business: config.PaypalBusinessEmail,
-            item_name: config.PaypalItemName,
-            item_number: customer.Mobile,
-            amount: config.PaypalItemAmount,
-            quantity: customer.NumberOfPeople,
-            currency_code: config.PaypalCurrencyCode,
-            rm: config.PaypalReturnMethod,
-            return: config.PaypalReturnUrl + "?guid=" + customer.Guid,
-            cancel_return: config.PaypalCancelUrl
-        }));
-    }
-
-});
 
 //Bind submit button
 $('#btnAdd').click(function ()
@@ -103,7 +108,18 @@ $('#btnAdd').click(function ()
 
     if (result == true)
     {
-        SaveCustomer(true);
+        var customer =
+                {
+                    WechatName: $('#txtWechatName').val().trim(),
+                    NumberOfPeople: $('#ddlNumberOfPeople').val(),
+                    Email: $('#txtEmail').val().trim(),
+                    RealName: $('#txtRealName').val().trim(),
+                    Mobile: $('#txtMobile').val().trim(),
+                    Desc: $('#txtDesc').val().trim(),
+                    Paid: false,
+                    Guid: null
+                };
+        SaveCustomer(customer, true,true);
     }
 
 });
@@ -224,19 +240,9 @@ function LoadCustomers()
 }
 
 //Save Customer
-function SaveCustomer(isAsync)
+function SaveCustomer(customer,isAsync,showSuccessMessage)
 {
-    var customer =
-                {
-                    WechatName: $('#txtWechatName').val().trim(),
-                    NumberOfPeople: $('#ddlNumberOfPeople').val(),
-                    Email: $('#txtEmail').val().trim(),
-                    RealName: $('#txtRealName').val().trim(),
-                    Mobile: $('#txtMobile').val().trim(),
-                    Desc: $('#txtDesc').val().trim(),
-                    Paid: false,
-                    Guid: null
-                };
+    
 
     $.ajax({
         url: '../api/customer',
@@ -249,9 +255,12 @@ function SaveCustomer(isAsync)
             customer.Guid = data.Guid;
             LoadCustomers();
 
-            $('#spResult').text('Success');
-            $('#spResult').addClass('message-success');
-
+            if (showSuccessMessage == true)
+            {
+                $('#spResult').text('Success');
+                $('#spResult').addClass('message-success');
+                alert('SUCCESS');
+            }
             
         },
         error: function (data)
@@ -259,6 +268,7 @@ function SaveCustomer(isAsync)
             var responseText = jQuery.parseJSON(data.responseText);
             $('#spResult').text('Failed - ' + responseText.Message);
             $('#spResult').addClass('message-error');
+            alert('Failed - ' + responseText.Message);
         }
     });
 
