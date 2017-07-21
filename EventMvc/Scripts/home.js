@@ -1,4 +1,8 @@
 ﻿
+
+var getUrl = window.location;
+var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 //Load Customers
 $(document).ready(function ()
 {
@@ -45,7 +49,7 @@ function renderPaypalButton()
                        RealName: $('#txtRealName').val().trim(),
                        Mobile: $('#txtMobile').val().trim(),
                        Desc: $('#txtDesc').val().trim(),
-                       Paid: false,
+                       Paid: 'false',
                        Guid: null
                    };
 
@@ -87,7 +91,7 @@ function renderPaypalButton()
                   RealName: $('#txtRealName').val().trim(),
                   Mobile: $('#txtMobile').val().trim(),
                   Desc: $('#txtDesc').val().trim(),
-                  Paid: true,
+                  Paid: 'true',
                   Guid: null
               };
                SaveCustomer(customer, true, true);
@@ -120,7 +124,7 @@ $('#btnAdd').click(function ()
                     RealName: $('#txtRealName').val().trim(),
                     Mobile: $('#txtMobile').val().trim(),
                     Desc: $('#txtDesc').val().trim(),
-                    Paid: false,
+                    Paid: 'false',
                     Guid: null
                 };
         SaveCustomer(customer, true,true);
@@ -201,7 +205,7 @@ function LoadCustomers()
     var paidCount = 0;
 
     $.ajax({
-        url: '../api/customer',
+        url: baseUrl+ '/api/customer',
         type: 'get',
         success: function (data)
         {
@@ -249,7 +253,7 @@ function SaveCustomer(customer,isAsync,showSuccessMessage)
     
 
     $.ajax({
-        url: '../api/customer',
+        url: baseUrl + '/api/customer',
         type: 'post',
         async: isAsync,
         data: JSON.stringify(customer),
@@ -285,7 +289,7 @@ function LoadConfig()
     var config = null;
 
     $.ajax({
-        url: '../api/config',
+        url: baseUrl+'/api/config',
         type: 'get',
         async:false,
         success: function (data)
@@ -308,3 +312,4 @@ function LoadConfig()
      
     return config;
 }
+
