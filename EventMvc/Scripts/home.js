@@ -13,14 +13,18 @@ $(document).ready(function ()
 
 function renderPaypalButton()
 {
+    var config = LoadConfig();
+    if (config == undefined || config == null)
+        return;
+
     paypal.Button.render({
-        env: 'sandbox', // sandbox | production
+        env: config.PaypalEnvironment, // sandbox | production
 
         // PayPal Client IDs - replace with your own
         // Create a PayPal app: https://developer.paypal.com/developer/applications/create
         client: {
-            sandbox: 'Ab7vejfykFlYEiAOt8_I6ZWTL8YOu_nUV1vRQLIGOOa3GDololwx4uQTYyOwgzrzOFFhVSVWD49k8pvv',
-            production: 'AUBpXrl_17wXu_-BS9CXYDe4GIWYEUdx_V9Kt2hPpcagFXEEE_30nPv4ywXlXoO77nhTNAltXm_kOpKs'
+            sandbox: config.PaypalSandboxClientId,
+            production: config.PaypalProductionClientId
         },
 
         // Show the buyer a 'Pay Now' button in the checkout flow
@@ -29,29 +33,28 @@ function renderPaypalButton()
         // payment() is called when the button is clicked
         payment: function (data, actions)
         {
-            var customer =
-                {
-                    WechatName: $('#txtWechatName').val().trim(),
-                    NumberOfPeople: $('#ddlNumberOfPeople').val(),
-                    Email: $('#txtEmail').val().trim(),
-                    RealName: $('#txtRealName').val().trim(),
-                    Mobile: $('#txtMobile').val().trim(),
-                    Desc: $('#txtDesc').val().trim(),
-                    Paid: false,
-                    Guid: null
-                };
-
+            
             var result = validateInput();
             if (result == true)
             {
-                var customer = SaveCustomer(customer, false, false);
+                var customer =
+                   {
+                       WechatName: $('#txtWechatName').val().trim(),
+                       NumberOfPeople: $('#ddlNumberOfPeople').val(),
+                       Email: $('#txtEmail').val().trim(),
+                       RealName: $('#txtRealName').val().trim(),
+                       Mobile: $('#txtMobile').val().trim(),
+                       Desc: $('#txtDesc').val().trim(),
+                       Paid: false,
+                       Guid: null
+                   };
+
+                customer = SaveCustomer(customer, false, false);
 
                 if (typeof customer == 'undefined' || customer == null || customer.NumberOfPeople=='0' || customer.Guid==null)
                     return;
 
-                var config = LoadConfig();
-                if (config == undefined || config == null)
-                    return;
+            
 
                 var totalAmount = parseFloat(config.PaypalItemAmount).toFixed(2) * parseInt(customer.NumberOfPeople);
 
@@ -60,7 +63,8 @@ function renderPaypalButton()
                     payment: {
                         transactions: [
                             {
-                                amount: { total: totalAmount, currency: 'AUD' }
+                                amount: { total: totalAmount, currency: config.PaypalCurrencyCode },
+                                description: config.PaypalItemDescription
                             }
                         ]
                     }
@@ -86,14 +90,14 @@ function renderPaypalButton()
                   Paid: true,
                   Guid: null
               };
-                SaveCustomer(customer, true, true);
+               SaveCustomer(customer, true, true);
             });
         },
         
         onError: function (err)
         {
             // Show an error page here, when an error occurs
-            alert(err.message);
+            alert('Error');
         }
     }, '#paypal-button');
 
@@ -286,18 +290,14 @@ function LoadConfig()
         async:false,
         success: function (data)
         {
-            config  = {
-                PaypalUrl: data.PaypalUrl,
-                PaypalReturnUrl: data.PaypalReturnUrl,
-                PaypalCancelUrl: data.PaypalCancelUrl,
-                PaypalBusinessEmail: data.PaypalBusinessEmail,
-                PaypalItemName: data.PaypalItemName,
+            config = {
                 PaypalItemAmount: data.PaypalItemAmount,
                 PaypalCurrencyCode: data.PaypalCurrencyCode,
-                PaypalReturnMethod: data.PaypalReturnMethod
+                PaypalEnvironment: data.PaypalEnvironment,
+                PaypalSandboxClientId: data.PaypalSandboxClientId,
+                PaypalProductionClientId: data.PaypalProductionClientId,
+                PaypalItemDescription: data.PaypalItemDescription
             };
-
-            
         },
         error: function (data)
         {

@@ -31,7 +31,7 @@
     <NumberOfPeople>1</NumberOfPeople>
     <RealName>test</RealName>
     <Mobile>0430510308</Mobile>
-    <Paid>True</Paid>
+    <Paid>False</Paid>
     <Desc>
     </Desc>
     <Guid>b98ce96e-0dd3-4318-a93b-386335a1519d</Guid>

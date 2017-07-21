@@ -18,21 +18,16 @@ namespace EventMvc.api
         public HttpResponseMessage LoadConfig()
         {
             Dictionary<string, string> dirConfig = new Dictionary<string, string>();
-            dirConfig["PaypalUrl"] = ConfigurationManager.AppSettings["PaypalUrl"].ToString();
-            dirConfig["PaypalBusinessEmail"] = ConfigurationManager.AppSettings["PaypalBusinessEmail"].ToString();
-            dirConfig["PaypalReturnUrl"] = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                 HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/" +
-                 ConfigurationManager.AppSettings["PaypalReturnUrl"].ToString();
-            dirConfig["PaypalCancelUrl"] = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/" +
-                ConfigurationManager.AppSettings["PaypalCancelUrl"].ToString();
-            dirConfig["PaypalBusinessEmail"] = ConfigurationManager.AppSettings["PaypalBusinessEmail"].ToString();
-            dirConfig["PaypalItemName"] = ConfigurationManager.AppSettings["PaypalItemName"].ToString();
+           
             dirConfig["PaypalItemAmount"] = ConfigurationManager.AppSettings["PaypalItemAmount"].ToString();
             dirConfig["PaypalCurrencyCode"] = ConfigurationManager.AppSettings["PaypalCurrencyCode"].ToString();
+            dirConfig["PaypalEnvironment"] = ConfigurationManager.AppSettings["PaypalEnvironment"].ToString();
+            dirConfig["PaypalSandboxClientId"] = ConfigurationManager.AppSettings["PaypalSandboxClientId"].ToString();
+            dirConfig["PaypalProductionClientId"] = ConfigurationManager.AppSettings["PaypalProductionClientId"].ToString();
+            dirConfig["PaypalItemDescription"] = ConfigurationManager.AppSettings["PaypalItemDescription"].ToString();
 
-            //the buyer's browser is redirected to the return URL by using the POST method, and all payment variables are included
-            dirConfig["PaypalReturnMethod"] = ConfigurationManager.AppSettings["PaypalReturnMethod"].ToString();
+            ////the buyer's browser is redirected to the return URL by using the POST method, and all payment variables are included
+            //dirConfig["PaypalReturnMethod"] = ConfigurationManager.AppSettings["PaypalReturnMethod"].ToString();
 
 
             HttpResponseMessage msg = Request.CreateResponse<Dictionary<string, string>>(HttpStatusCode.OK, dirConfig);
