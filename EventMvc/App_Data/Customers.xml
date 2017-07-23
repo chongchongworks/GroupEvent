@@ -24,16 +24,4 @@
     </Desc>
     <Guid>8f8acb25-4524-4019-bd85-fef6beb3a630</Guid>
   </Customer>
-  <Customer>
-    <WechatName>test</WechatName>
-    <Email>
-    </Email>
-    <NumberOfPeople>1</NumberOfPeople>
-    <RealName>test</RealName>
-    <Mobile>0430510308</Mobile>
-    <Paid>False</Paid>
-    <Desc>
-    </Desc>
-    <Guid>b98ce96e-0dd3-4318-a93b-386335a1519d</Guid>
-  </Customer>
 </Customers>
