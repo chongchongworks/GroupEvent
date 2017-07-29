@@ -29,6 +29,7 @@ namespace EventMvc.api
             ////the buyer's browser is redirected to the return URL by using the POST method, and all payment variables are included
             //dirConfig["PaypalReturnMethod"] = ConfigurationManager.AppSettings["PaypalReturnMethod"].ToString();
 
+            dirConfig["ReportPassword"] = ConfigurationManager.AppSettings["ReportPassword"].ToString();
 
             HttpResponseMessage msg = Request.CreateResponse<Dictionary<string, string>>(HttpStatusCode.OK, dirConfig);
 
