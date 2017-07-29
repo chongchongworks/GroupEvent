@@ -59,7 +59,7 @@ var ReportLoader = {
     {
         ReportLoader.settings.btnSubmit.on('click', function ()
         {
-
+ 
         })
     }
 
