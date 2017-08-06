@@ -222,7 +222,7 @@ function LoadCustomers()
                 if (data[i].Paid.toLowerCase() == 'true')
                 {
                     $('#divCustomerList').append(
-                        '<div class="col-xs-4 paid-backgroup">' +
+                        '<div class="col-xs-4 border green-backgroup ">' +
                              data[i].WechatName + '(*' + data[i].NumberOfPeople + ')' +
                         '</div>'
                         );
@@ -231,7 +231,7 @@ function LoadCustomers()
                 else
                 {
                     $('#divCustomerList').append(
-                       '<div class="col-xs-4 dl-item">' +
+                       '<div class="col-xs-4 border grey-backgroup">' +
                            data[i].WechatName + '(*' + data[i].NumberOfPeople + ')' +
                        '</div>'
                        );
