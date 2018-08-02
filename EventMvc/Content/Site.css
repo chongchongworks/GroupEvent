@@ -73,18 +73,16 @@ footer {
     font-weight:normal;
 }
 
-.paid-backgroup {
-    background-color:#96C950;
-    border-style: Solid;
-    border-width: 1px;
-
+.border {
+    border-width:1px;
+    border-style:solid;
 }
 
-.dl-item {
+.green-backgroup {
+    background-color:#96C950;
+}
+.grey-backgroup {
     background-color: #cccccc;
-    border-style: Solid;
-    border-width: 1px;
-
 }
 
 .subtitle {

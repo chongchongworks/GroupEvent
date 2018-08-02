@@ -3,5 +3,60 @@
     ViewBag.Title = "Report";
 }
 
-<h2>Index</h2>
+
+<div class="subtitle">
+    <h2>
+        Report
+    </h2>
+</div>
+
+<div id="divPassword" style="padding:10px;">
+    <div class="row form-group form-horizontal">
+        <label class="col-xs-2 control-label" for="txtPassword">Password</label>
+        <div class="col-xs-5">
+            <input type="password" id="txtPassword" name="txtPassword" class="form-control" />
+        </div>
+        <div class="col-xs-3">
+            <input type="button" id="btnSubmit" name="btnSubmit" class="btn" value="Submit" />
+        </div>
+    </div>
+    <div class-="row">
+        <div class="col-xs-5 error">
+            <span id="spError"></span>
+        </div>
+    </div>
+</div>
+
+<div id="divReport" style="padding:10px;">
+    <table class="table table-striped" id="tbReport">
+        <thead>
+            <tr>
+                <td>微信</td>
+                <td>人数</td>
+                <td>姓名</td>
+                <td>Mobile</td>
+                <td>Email</td>
+                <td>住</td>
+                <td>Paid</td>
+                <td>Desc</td>
+            </tr>
+        </thead>
+
+    </table>
+
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/Report.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            ReportLoader.init();
+        });
+
+    </script>
+}
+
 

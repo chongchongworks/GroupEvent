@@ -1,16 +1,18 @@
 ﻿
 
 var getUrl = window.location;
+
+// for web api url, include application path
 var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+// if localhost, we don't want application path
+if (getUrl.host.indexOf('localhost') >= 0)
+    baseUrl = getUrl.protocol + "//" + getUrl.host + "/"
 
 //Load Customers
 $(document).ready(function ()
 {
-
-
     LoadCustomers();
-    
-    
     renderPaypalButton();
 });
 
@@ -55,10 +57,10 @@ function renderPaypalButton()
 
                 customer = SaveCustomer(customer, false, false);
 
-                if (typeof customer == 'undefined' || customer == null || customer.NumberOfPeople=='0' || customer.Guid==null)
-                    return;
+                if (typeof customer == 'undefined' || customer == null || customer.NumberOfPeople == '0' || customer.Guid == null)
+                    return false;
 
-            
+
 
                 var totalAmount = parseFloat(config.PaypalItemAmount).toFixed(2) * parseInt(customer.NumberOfPeople);
 
@@ -74,6 +76,8 @@ function renderPaypalButton()
                     }
                 });
             }
+            else
+                return false;
         },
 
         // onAuthorize() is called when the buyer approves the payment
@@ -101,7 +105,8 @@ function renderPaypalButton()
         onError: function (err)
         {
             // Show an error page here, when an error occurs
-            alert('Error');
+            alert('Paypal Error');
+          
         }
     }, '#paypal-button');
 
@@ -217,7 +222,7 @@ function LoadCustomers()
                 if (data[i].Paid.toLowerCase() == 'true')
                 {
                     $('#divCustomerList').append(
-                        '<div class="col-xs-4 paid-backgroup">' +
+                        '<div class="col-xs-4 border green-backgroup ">' +
                              data[i].WechatName + '(*' + data[i].NumberOfPeople + ')' +
                         '</div>'
                         );
@@ -226,7 +231,7 @@ function LoadCustomers()
                 else
                 {
                     $('#divCustomerList').append(
-                       '<div class="col-xs-4 dl-item">' +
+                       '<div class="col-xs-4 border grey-backgroup">' +
                            data[i].WechatName + '(*' + data[i].NumberOfPeople + ')' +
                        '</div>'
                        );

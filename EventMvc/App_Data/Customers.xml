@@ -31,9 +31,9 @@
     <NumberOfPeople>1</NumberOfPeople>
     <RealName>test</RealName>
     <Mobile>0430510308</Mobile>
-    <Paid>False</Paid>
+    <Paid>false</Paid>
     <Desc>
     </Desc>
-    <Guid>b98ce96e-0dd3-4318-a93b-386335a1519d</Guid>
+    <Guid>8a35854b-0e05-44e4-ac4a-ad1ab684e538</Guid>
   </Customer>
 </Customers>
